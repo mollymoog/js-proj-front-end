@@ -34,25 +34,21 @@ class Family {
     }
 
     createFreeTrials(e) {
-        //fetch request
         fetch(`http://localhost:3000/families/${this.id}/free_trials`)
         .then(resp => resp.json())
         .then(free_trials => {
 
             
             free_trials.forEach(free_trial => {
-
                 const {id, service, link, username, password, expiration, active, family_id
                 } = free_trial;
 
                 let freetrial = new FreeTrial(id, service, link, username, password, expiration, active, family_id);
-                freetrial.displayFreeTrials();
+                // freetrial.displayFreeTrials();
             })
-        })
-        
 
-        //return free trials for family
-        //create new freetrial object
+        })
+        // freetrials()
     }
 
 
