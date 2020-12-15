@@ -15,12 +15,9 @@ class FreeTrial {
     freeTrials() {
         this.clearFamilies();
         this.renderFreeTrials();
-        this.renderForm();
     }
 
     clearFamilies() {
-        this.renderForm();
-        //creates form for each free trial NOT GOOD
         let familylist = document.getElementById("family-list");
 
         for (const child of familylist.children) {
@@ -42,32 +39,36 @@ class FreeTrial {
                 })
         }
         free_trialHolder.appendChild(free_trialContainer);
-
-        // add form and button to add/edit free trials
-    }
-
-    renderForm() {
-        const formHolder = document.getElementById("form");
-        const formContainer = document.createElement(`div`);
-        formContainer.dataset.id = this.id;
-        formContainer.id = this.id;
-        formContainer.classList.add = "form-display"
-        formContainer.innerHTML += this.formHTML() 
-        formHolder.appendChild(formContainer);
-        formContainer.addEventListener("click", e => {
-            if (e.target.className === "submit") API.addFreeTrial(e)
-        })
-
     }
 
     cancelFreeTrials(e) {
+        debugger
+        let data = {'free_trial': {
+            // 'service': e.target.service.value,
+            // 'link': e.target.link.value,
+            // 'username': e.target.username.value,
+            // 'password': e.target.password.value,
+            // 'expiration': e.target.expiration.value,
+            'active': this.active = false
+            // 'family_id': e.target.family_id.value
+        }}
+        debugger
         fetch(`http://localhost:3000/families/${this.family_id}/free_trials/${this.id}`, {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({active: false})
+        body: JSON.stringify(data)
     })
-    // .then(resp => resp.json())
+    .then(resp => resp.json())
+    .then(free_trial => {
+        const { id, service, link, username, password, expiration, active, family_id } = free_trial;
+
+    //     new FreeTrial(id, service, link, username, password, expiration, active, family_id)
+    })
     //updates API, but doesnt reload page.
+    debugger
+    const el = document.getElementById('free-trial-list').children;  
+    debugger 
+    el.remove();
     this.freeTrials()
 
     }
@@ -87,28 +88,6 @@ class FreeTrial {
         <button type="button" class="cancel-button" data-id=${this.id}>Cancel</button>
         `
     }
-
-    formHTML() {
-        return `
-        <form action="http://localhost:3000/families/${this.family_id}/free_trials" method="POST">
-            <label> Service: <input type="text" name="service" id="service" /></label><br />
-            <label> Link: <input type="text" name="link" id="link" /></label><br />
-            <label> Username: <input type="text" name="username" id="username" /></label><br />
-            <label> Password: <input type="text" name="password" id="password" /></label><br />
-            <label> Expiration: <input type="datetime" name="expiration" id="expiration" /></label><br />
-            <label> Active: 
-                <input type="radio" id="active-yes" name="active" value="yes">
-                <label for="active-yes">yes</label>
-                <input type="radio" id="active-no" name="active" value="no">
-                <label for="active-no">no</label>
-            </label>
-            <input type="submit" name="submit" id="submit" value="Submit" />
-        </form>
-        `
-    }
-
-
-
 }
 
         //link to 'homepage'
