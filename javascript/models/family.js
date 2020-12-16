@@ -4,12 +4,9 @@ class Family {
         this.name = name;
         this.email = email;
         this.phone = phone;
-        //redner this instance to the page
+
         this.renderFamily()
     }
-
-    //render method that creates a div & append it to the page, add relevant classes and ids
-    //possibly event delegation/listeners
 
     renderFamily() {
         const familyHolder = document.getElementById("family-list");
@@ -47,7 +44,6 @@ class Family {
 
                 let freetrial = 
                 new FreeTrial(id, service, link, username, password, expiration, active, family_id);
-                // freetrial.displayFreeTrials();
             })
         })
     }
@@ -61,12 +57,11 @@ class Family {
         formContainer.innerHTML += this.formHTML() 
         formHolder.appendChild(formContainer);
         formContainer.addEventListener("submit", e => API.addFreeTrial(e))
-        //maybe remove arrow function, may not need (e)
     }
 
     formHTML() {
         return `
-        <form>
+        <form id="free-trial-form">
             <label> Service: <input type="text" name="service" id="service" /></label><br />
             <label> Link: <input type="text" name="link" id="link" /></label><br />
             <label> Username: <input type="text" name="username" id="username" /></label><br />

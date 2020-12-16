@@ -12,7 +12,7 @@ class API {
     }
 
     static addFreeTrial(e){
-        debugger
+
         e.preventDefault()
 
         const myFamilyId = document.getElementById("form").children[0].id;
@@ -25,7 +25,7 @@ class API {
             'active': e.target.active.value,
             'family_id': myFamilyId
         }
-        };         debugger
+        }; 
 
 
         fetch(`http://localhost:3000/families/${myFamilyId}/free_trials`, {
@@ -39,8 +39,8 @@ class API {
             const { id, service, link, username, password, expiration, active, family_id } = free_trial;
 
             new FreeTrial(id, service, link, username, password, expiration, active, family_id)
-            // document.getElementById("form").reset()
-            //what is the doc id
+            
+            document.getElementById("free-trial-form").reset()
         })
       }
 }

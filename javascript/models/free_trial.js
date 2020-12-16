@@ -44,15 +44,9 @@ class FreeTrial {
     cancelFreeTrials(e) {
         debugger
         let data = {'free_trial': {
-            // 'service': e.target.service.value,
-            // 'link': e.target.link.value,
-            // 'username': e.target.username.value,
-            // 'password': e.target.password.value,
-            // 'expiration': e.target.expiration.value,
-            'active': this.active = false
-            // 'family_id': e.target.family_id.value
+            'active': this.active = "no"
         }}
-        debugger
+
         fetch(`http://localhost:3000/families/${this.family_id}/free_trials/${this.id}`, {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
@@ -61,16 +55,14 @@ class FreeTrial {
     .then(resp => resp.json())
     .then(free_trial => {
         const { id, service, link, username, password, expiration, active, family_id } = free_trial;
-
-    //     new FreeTrial(id, service, link, username, password, expiration, active, family_id)
     })
-    //updates API, but doesnt reload page.
-    debugger
-    const el = document.getElementById('free-trial-list').children;  
-    debugger 
-    el.remove();
-    this.freeTrials()
 
+    let freeTrialList = document.getElementById("free-trial-list");
+
+        for (const child of freeTrialList.children) {
+            child.remove()
+        }
+    this.freeTrials()
     }
 
     freeTrialHTML() {
