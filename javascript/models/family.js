@@ -1,9 +1,10 @@
 class Family {
-    constructor(id, name, email, phone) {
+    constructor(id, name, email, phone, free_trials) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.free_trials = free_trials
 
         this.renderFamily()
     }
@@ -24,10 +25,13 @@ class Family {
     }
 
     familyHTML() {
+        debugger
         return `
         <h3 class="headline">${this.name}</h3>
         <p>Email: ${this.email}</p>
         <p>Phone: ${this.phone}</p>
+        <p>${this.free_trials.filter(ft => ft.active == true).length
+        } Active Free-Trial(s)</p>
         <button type="button" class="free-trial-button" data-id=${this.id}>Subscriptions</button>
         `
     }

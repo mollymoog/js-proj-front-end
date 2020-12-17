@@ -5,8 +5,8 @@ class API {
         .then(resp => resp.json())
         .then(families => {
             families.forEach(family => {
-                const {id, name, email, phone} = family
-                new Family(id, name, email, phone)
+                const {id, name, email, phone, free_trials} = family
+                new Family(id, name, email, phone, free_trials)
             })
         })
     }
