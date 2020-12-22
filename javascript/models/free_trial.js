@@ -51,18 +51,18 @@ class FreeTrial {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
-    })
-    .then(resp => resp.json())
-    .then(free_trial => {
-        const { id, service, link, username, password, expiration, active, family_id } = free_trial;
-    })
+        })
+        .then(resp => resp.json())
+        // .then(free_trial => {
+        // const { id, service, link, username, password, expiration, active, family_id } = free_trial;
+        // })
 
-    let freeTrialList = document.getElementById("free-trial-list");
+        let freeTrialList = document.getElementById("free-trial-list");
 
         for (const child of freeTrialList.children) {
             child.remove()
         }
-    this.freeTrials()
+        this.freeTrials()
     }
 
     freeTrialHTML() {

@@ -10,6 +10,10 @@ class Family {
     }
 
     renderFamily() {
+        const yellow = document.getElementById("yellow");
+        yellow.addEventListener("click", e => {
+            document.body.style.backgroundColor = "yellow"
+        })
         const familyHolder = document.getElementById("family-list");
         const familyContainer = document.createElement(`div`);
         familyContainer.dataset.id = this.id;
